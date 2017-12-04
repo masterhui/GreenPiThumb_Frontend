@@ -17,10 +17,11 @@ def main(args):
         light_store = db_store.LightStore(db_connection)
         soil_moisture_store = db_store.SoilMoistureStore(db_connection)
         humidity_store = db_store.HumidityStore(db_connection)
+        watering_event_store = db_store.WateringEventStore(db_connection)        
 
         app.create(
             images.Indexer(args.image_path), temperature_store, light_store,
-            soil_moisture_store, humidity_store).run('0.0.0.0', args.port)
+            soil_moisture_store, humidity_store, watering_event_store).run('0.0.0.0', args.port)
 
 
 if __name__ == '__main__':
