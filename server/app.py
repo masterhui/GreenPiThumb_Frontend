@@ -16,6 +16,7 @@ def create(image_indexer, temperature_store, light_store, soil_moisture_store,
         light_store: Interface for retrieving light records.
         soil_moisture_store: Interface for retrieving soil moisture records.
         humidity_store: Interface for retrieving humidity records.
+        watering_event_store: Interface for retrieving watering event records.
 
     Returns:
         A Flask app that can serve HTTP requests.
@@ -39,8 +40,12 @@ def create(image_indexer, temperature_store, light_store, soil_moisture_store,
     def humidity_history():
         return encoder.encode(humidity_store.get())
 
+    @app.route('/wateringEventHistory.json')
+    def watering_event_history():
+        return encoder.encode(watering_event_store.get())
+ 
     @app.route('/images.json')
     def image_index():
-        return encoder.encode(image_indexer.index())
+        return encoder.encode(image_indexer.index())   
 
     return app
