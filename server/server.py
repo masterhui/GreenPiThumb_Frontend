@@ -14,13 +14,14 @@ def main(args):
     with contextlib.closing(db_store.open_or_create_db(
             args.db_file)) as db_connection:
         temperature_store = db_store.TemperatureStore(db_connection)
+        water_level_store = db_store.WaterLevelStore(db_connection)
         light_store = db_store.LightStore(db_connection)
         soil_moisture_store = db_store.SoilMoistureStore(db_connection)
         humidity_store = db_store.HumidityStore(db_connection)
         watering_event_store = db_store.WateringEventStore(db_connection)        
 
         app.create(
-            images.Indexer(args.image_path), temperature_store, light_store,
+            images.Indexer(args.image_path), temperature_store, water_level_store, light_store,
             soil_moisture_store, humidity_store, watering_event_store).run('0.0.0.0', args.port)
 
 
