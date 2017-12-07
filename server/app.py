@@ -13,7 +13,7 @@ def create(image_indexer, temperature_store, water_level_store, light_store, soi
     Args:
         image_indexer: Interface for indexing GreenPiThumb images.
         temperature_store: Interface for retrieving temperature records.
-        temperature_store: Interface for retrieving water level records.
+        water_level_store: Interface for retrieving water level records.
         light_store: Interface for retrieving light records.
         soil_moisture_store: Interface for retrieving soil moisture records.
         humidity_store: Interface for retrieving humidity records.
