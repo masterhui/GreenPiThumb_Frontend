@@ -29,7 +29,7 @@ def create(image_indexer, temperature_store, water_level_store, light_store, soi
     def temperature_history():
         return encoder.encode(temperature_store.get())
         
-    @app.route('/WaterLevelHistory.json')
+    @app.route('/waterLevelHistory.json')
     def water_level_history():
         return encoder.encode(water_level_store.get())        
 
