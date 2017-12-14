@@ -3,7 +3,7 @@ import flask
 import json_encoder
 
 
-def create(image_indexer, temperature_store, water_level_store, light_store, soil_moisture_store,
+def create(image_indexer_full_res, image_indexer_reduced_res, temperature_store, water_level_store, light_store, soil_moisture_store,
            humidity_store, watering_event_store):
     """Creates a new GreenPiThumb flask app.
 
@@ -11,7 +11,8 @@ def create(image_indexer, temperature_store, water_level_store, light_store, soi
     frontend's dynamic resources.
 
     Args:
-        image_indexer: Interface for indexing GreenPiThumb images.
+        image_indexer_full_res: Interface for indexing full resolution GreenPiThumb images.
+        image_indexer_reduced_res: Interface for indexing reduced resolution GreenPiThumb images.
         temperature_store: Interface for retrieving temperature records.
         water_level_store: Interface for retrieving water level records.
         light_store: Interface for retrieving light records.
@@ -49,8 +50,12 @@ def create(image_indexer, temperature_store, water_level_store, light_store, soi
     def watering_event_history():
         return encoder.encode(watering_event_store.get())
  
-    @app.route('/images.json')
-    def image_index():
-        return encoder.encode(image_indexer.index())   
+    @app.route('/images_full_res.json')
+    def image_index_full_res():
+        return encoder.encode(image_indexer_full_res.index())   
+        
+    @app.route('/images_reduced_res.json')
+    def image_index_reduced_res():
+        return encoder.encode(image_indexer_reduced_res.index())           
 
     return app

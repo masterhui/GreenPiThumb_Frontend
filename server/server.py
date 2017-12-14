@@ -19,9 +19,9 @@ def main(args):
         soil_moisture_store = db_store.SoilMoistureStore(db_connection)
         humidity_store = db_store.HumidityStore(db_connection)
         watering_event_store = db_store.WateringEventStore(db_connection)        
-
+        
         app.create(
-            images.Indexer(args.image_path), temperature_store, water_level_store, light_store,
+            images.Indexer(args.image_path, "full_res"), images.Indexer(args.image_path, "reduced_res"), temperature_store, water_level_store, light_store,
             soil_moisture_store, humidity_store, watering_event_store).run('0.0.0.0', args.port)
 
 
